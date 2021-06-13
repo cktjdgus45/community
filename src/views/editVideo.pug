@@ -1,0 +1,9 @@
+extends base.pug
+
+block content 
+    h4 Change Title of video
+    form(method="POST",action='edit')
+        input(placeholder="제목",required,type="text",name="title",maxlength=25,value=video.title)
+        input(placeholder="설명",required,type="text",name="description",maxlength=75,value=video.description)
+        input(placeholder="콤마로 구분됩니다",required,type="text",name="hashtags",maxlength=25,value=video.hashtags.join())
+        input(value="저장하기",type="submit")

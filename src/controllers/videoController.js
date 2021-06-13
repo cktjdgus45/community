@@ -4,7 +4,8 @@ import Comment from '../models/Comment';
 
 export const home = async (req, res) => {
     try {
-        const videos = await Video.find({});
+        const videos = await Video.find({}).populate("owner");
+        console.log(videos);
         return res.render('home', { pageTitle: "home", videos });
 
     } catch (error) {
@@ -30,20 +31,17 @@ export const getUpload = (req, res) => {
 }
 
 export const postUpload = async (req, res) => {
+    const videoFileUrl = req.files['video'][0].path;
+    const imageFileUrl = req.files['image'][0].path;
     const { _id } = req.session.user;
-    const { path: fileUrl } = req.file;
-    const { title, description, hashtags } = req.body;
+    const { title, content } = req.body;
     try {
         const newVideo = await Video.create({
             title,
-            description,
-            fileUrl,
-            hashtags: Video.formatHashtags(hashtags),
+            content,
+            videoFileUrl,
+            imageFileUrl,
             owner: _id,
-            meta: {
-                views: 0,
-                rating: 0
-            }
         });
         const user = await User.findById(_id);
         user.videos.push(newVideo._id);
