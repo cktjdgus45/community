@@ -1,6 +1,6 @@
 import express from 'express';
 import { protectorMiddleware, videoUpload } from '../localsMiddleware';
-import { deleteNews, getEdit, getUpload, postEdit, postUpload, watch } from '../controllers/videoController';
+import { deleteNews, getEdit, getUpload, postEdit, postUpload, watch } from '../controllers/newsController';
 
 const newsRouter = express.Router();
 

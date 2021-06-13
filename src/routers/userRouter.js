@@ -1,6 +1,6 @@
 import express from 'express';
-import { protectorMiddleware, publicOnlyMiddleware, avatarUpload } from '../localsMiddleware';
-import { finishGithubLogin, finishKakaoLogin, finishNaverLogin, finishGoogleLogin, logout, profile, startGoogleLogin, startGithubLogin, startKakaoLogin, startNaverLogin, getChangePassword, postChangePassword } from '../controllers/userController';
+import { protectorMiddleware, publicOnlyMiddleware } from '../localsMiddleware';
+import { finishGithubLogin, finishKakaoLogin, finishNaverLogin, finishGoogleLogin, logout, profile, startGoogleLogin, startGithubLogin, startKakaoLogin, startNaverLogin } from '../controllers/userController';
 
 const userRouter = express.Router();
 

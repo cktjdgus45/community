@@ -1,5 +1,5 @@
 import express from 'express';
-import { createComment, deleteComment } from '../controllers/videoController';
+import { createComment, deleteComment } from '../controllers/newsController';
 
 const apiRouter = express.Router();
 
