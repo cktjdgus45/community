@@ -7,10 +7,13 @@ block content
             a(href=`/users/${video.owner._id}`) #{video.owner.name}
     hr
     div
+        h3=video.title
         p=video.content
-    div        
-        video(src="/"+video.videoFileUrl,width="500",height="500",controls=true,data-id=video._id)
-        img(src="/"+video.imageFileUrl,width="200",height="200")
+    div
+        if(video.videoFileUrl !== "")
+            video(src="/"+video.videoFileUrl,width="500",height="500",controls=true,data-id=video._id)
+        if(video.imageFileUrl !== "")
+            img(src="/"+video.imageFileUrl,width="200",height="200")
     hr
     div
     if String(video.owner._id) === String(loggedInUser._id)

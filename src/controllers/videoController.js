@@ -30,8 +30,8 @@ export const getUpload = (req, res) => {
 }
 
 export const postUpload = async (req, res) => {
-    const videoFileUrl = req.files['video'][0].path;
-    const imageFileUrl = req.files['image'][0].path;
+    const videoFileUrl = req.files['video'] ? req.files['video'][0].path : "";
+    const imageFileUrl = req.files['image'] ? req.files['image'][0].path : "";
     const { _id } = req.session.user;
     const { title, content } = req.body;
     try {
@@ -78,9 +78,9 @@ export const postEdit = async (req, res) => {
     const { id } = req.params;
     const { user: { _id } } = req.session;
     const { title, content } = req.body;
-    const videoFileUrl = req.files['video'][0].path;
-    const imageFileUrl = req.files['image'][0].path;
-    const video = await Video.exists({ _id: id });
+    const videoFileUrl = req.files['video'] ? req.files['video'][0].path : "";
+    const imageFileUrl = req.files['image'] ? req.files['image'][0].path : "";
+    const video = await Video.findById({ _id: id });
     if (!video) {
         return res.status(404).render('404', { pageTitle: 'News Not Found' });
     }
@@ -90,8 +90,8 @@ export const postEdit = async (req, res) => {
     await Video.findByIdAndUpdate(id, {
         title,
         content,
-        videoFileUrl,
-        imageFileUrl
+        videoFileUrl: videoFileUrl === video.videoFileUrl ? video.videoFileUrl : videoFileUrl,
+        imageFileUrl: imageFileUrl === video.imageFileUrl ? video.imageFileUrl : imageFileUrl
     });
     return res.redirect(`/videos/${id}`);
 }

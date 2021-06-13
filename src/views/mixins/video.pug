@@ -8,6 +8,8 @@ mixin video(video)
         p=video.content         
         small=video.createdAt 
         div
-            img(src="/"+video.imageFileUrl,width="200",height="200")
-            video(src="/"+video.videoFileUrl,width="500",height="500",controls=true)
+            if(video.videoFileUrl !== "")
+                video(src="/"+video.videoFileUrl,width="500",height="500",controls=true,data-id=video._id)
+            if(video.imageFileUrl !== "")
+                img(src="/"+video.imageFileUrl,width="200",height="200")
         hr

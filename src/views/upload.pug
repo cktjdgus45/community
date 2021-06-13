@@ -5,9 +5,9 @@ block content
         span=errorMessage
     form(method="POST",enctype="multipart/form-data")
         label(for="video") 동영상
-        input(type="file",accept="video/*",required,id="video",name="video")
+        input(type="file",accept="video/*",id="video",name="video")
         label(for="image") 이미지
-        input(type="file",accept="image/png, image/gif, image/jpeg",required,id="image",name="image" )
+        input(type="file",accept="image/png, image/gif, image/jpeg",id="image",name="image" )
         input(placeholder="제목을 입력해주세요.",required,type="text",name="title",maxlength=25,autocomplete="off")
         textarea(name="content", cols="30", rows="10",required,placeholder='내용을 적어주세요.')         
         input(value="등록", type="submit")
