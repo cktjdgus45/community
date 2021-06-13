@@ -84,11 +84,11 @@ export const postEdit = async (req, res) => {
         videoFileUrl: videoFileUrl === news.videoFileUrl ? news.videoFileUrl : videoFileUrl,
         imageFileUrl: imageFileUrl === news.imageFileUrl ? news.imageFileUrl : imageFileUrl
     });
-    return res.redirect(`/videos/${id}`);
+    return res.redirect(`/news/${id}`);
 }
 
 
-export const deleteVideo = async (req, res) => {
+export const deleteNews = async (req, res) => {
     const { id } = req.params;
     const { user: { _id } } = req.session;
     const news = await News.findById(id);
