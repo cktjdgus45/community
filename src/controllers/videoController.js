@@ -32,6 +32,7 @@ export const getUpload = (req, res) => {
 export const postUpload = async (req, res) => {
     const videoFileUrl = req.files['video'] ? req.files['video'][0].path : "";
     const imageFileUrl = req.files['image'] ? req.files['image'][0].path : "";
+    console.log(videoFileUrl, imageFileUrl);
     const { _id } = req.session.user;
     const { title, content } = req.body;
     try {
