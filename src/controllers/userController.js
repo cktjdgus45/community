@@ -1,73 +1,9 @@
 import User from '../models/User';
-import Video from '../models/Video';
 import bcrypt from 'bcrypt';
 import fetch from 'node-fetch';
 
-
-export const profile = async (req, res) => {
-    const { id } = req.params;
-
-    const user = await User.findById(id).populate("videos");
-
-    if (!user) {
-        return res.status(400).render('404', { pageTitle: "계정 오류" });
-    }
-    return res.render('profile', { pageTitle: `${user.name}의 프로필`, user });
-}
-
 export const logout = (req, res) => {
     req.session.destroy();
-    return res.redirect('/');
-}
-
-export const getChangePassword = (req, res) => {
-    return res.render("change-password", { pageTitle: "Change Password" });
-}
-export const postChangePassword = async (req, res) => {
-    const {
-        session: {
-            user: { _id, password }
-        },
-        body: { oldPassword, newPassword, newPasswordConfirmation }
-    } = req;
-
-    if (newPassword !== newPasswordConfirmation) {
-        return res.status(400).render('change-password', { pageTitle: "비밀번호 변경", errorMessage: "새 비밀번호가 일치하지 않습니다." })
-    }
-    const isSamePassword = await bcrypt.compare(oldPassword, password);
-    if (!isSamePassword) {
-        return res.status(400).render('change-password', { pageTitle: "비밀번호 변경", errorMessage: "현재 비밀번호가 일치하지 않습니다." });
-    }
-    const user = await User.findById(_id);
-    user.password = newPassword;
-    req.session.user.password = user.password;
-    return res.redirect('/users/logout');
-}
-
-export const getEdit = (req, res) => {
-    return res.render('edit-profile', { pageTitle: "Edit profile" });
-}
-
-export const postEdit = async (req, res) => {
-    const userData = req.session.user;
-    const {
-        session: {
-            user: { _id, avatarUrl }
-        },
-        body: { name, email, location },
-        file
-    } = req;
-    const isEmailExist = await User.exists({ email });
-    if (userData.email !== email && isEmailExist) {
-        return res.status(400).render('edit-profile', { pageTitle: "프로필 변경", errorMessage: "이미 사용하고 있는 아이디 입니다." });
-    }
-    const updatedUser = await User.findByIdAndUpdate(_id, {
-        avatarUrl: file ? file.path : avatarUrl,
-        name,
-        email,
-        location
-    }, { new: true });
-    req.session.user = updatedUser;
     return res.redirect('/');
 }
 

@@ -31,14 +31,14 @@ const handleDelete = async (event) => {
 
 const handleSubmit = async (event) => {
     event.preventDefault();
-    const video = document.querySelector('video');
+    const news = document.querySelector('.news');
     const textarea = form.querySelector('textarea');
-    const videoId = video.dataset.id;
+    const newsId = news.dataset.id;
     const text = textarea.value; //댓글 값.
     if (text === "") {
         return;
     }
-    const response = await fetch(`/api/videos/${videoId}/comment`, {
+    const response = await fetch(`/api/videos/${newsId}/comment`, {
         method: "POST",
         body: JSON.stringify({ text }),
         headers: {
