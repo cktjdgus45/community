@@ -5,7 +5,6 @@ import Comment from '../models/Comment';
 export const home = async (req, res) => {
     try {
         const videos = await Video.find({}).populate("owner");
-        console.log(videos);
         return res.render('home', { pageTitle: "home", videos });
 
     } catch (error) {
@@ -77,18 +76,22 @@ export const getEdit = async (req, res) => {
 
 export const postEdit = async (req, res) => {
     const { id } = req.params;
-    const { title, description, hashtags } = req.body;
+    const { user: { _id } } = req.session;
+    const { title, content } = req.body;
+    const videoFileUrl = req.files['video'][0].path;
+    const imageFileUrl = req.files['image'][0].path;
     const video = await Video.exists({ _id: id });
     if (!video) {
-        return res.status(404).render('404', { pageTitle: 'Video Not Found' });
+        return res.status(404).render('404', { pageTitle: 'News Not Found' });
     }
     if (String(video.owner) !== _id) {
         return res.status(403).redirect('/');
     }
     await Video.findByIdAndUpdate(id, {
         title,
-        description,
-        hashtags: Video.formatHashtags(hashtags)
+        content,
+        videoFileUrl,
+        imageFileUrl
     });
     return res.redirect(`/videos/${id}`);
 }
