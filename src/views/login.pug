@@ -1,0 +1,27 @@
+extends base.pug
+
+block content 
+    if(errorMessage)
+            p=errorMessage 
+    form(method="POST",autocomplete="off")
+        input(name="email",type="text",placeholder="아이디",required,autocomplete="off",style="display:none")
+        input(name="password",type="password",placeholder="비밀번호",required,autocomplete="new-password",style="display:none")
+        p(style="display:none") 자동완성 없애기 위한 displaynone input태그 
+        input(name="email",type="text",placeholder="아이디",required,autocomplete="off")
+        input(name="password",type="password",placeholder="비밀번호",required,autocomplete="new-password")
+        input(type="submit",value="로그인")      
+        br
+        
+        a(href="/users/github/start") 
+            i(class="fab fa-github")          
+    
+        a(href="/users/kakao/start")
+            i(class="fas fa-comment")
+        a(href="/users/naver/start")
+            i(class="fab fa-facebook-square")
+        a(href="/users/google/start")
+            i(class="fab fa-google")
+    hr  
+    div 
+        span 아직 계정이 없으신가요?      
+        a(href="/join") 회원가입 하러가기 &rarr;   

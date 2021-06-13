@@ -1,0 +1,17 @@
+extends base.pug
+
+block content 
+    if(errorMessage)
+            p=errorMessage 
+    form(method="POST",autocomplete="off")
+        input(name="email",type="email",placeholder="이메일",required,autocomplete="off",autocapitalize="off")
+        input(name="password",type="password",placeholder="비밀번호",required,autocomplete="new-password")
+        input(name="password2",type="password",placeholder="비밀번호 재입력",required,autocomplete="new-password")
+        input(name="name",type="text",placeholder="이름",required,autocomplete="chrome-off")
+        input(name="location",type="text",placeholder="위치",required,autocomplete="chrome-off")
+        input(type="submit",value="회원가입")      
+
+    hr  
+    div 
+        span 이미 계정을 가지고 있으신가요?      
+        a(href="/login") 로그인 하러가기 &rarr;        

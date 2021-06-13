@@ -1,0 +1,12 @@
+extends base.pug
+
+block content
+    if errorMessage 
+        span=errorMessage
+    form(method="POST",enctype="multipart/form-data")
+        label(for="video") 동영상
+        input(type="file",accept="video/*",required,id="video",name="video")
+        input(placeholder="Title",required,type="text",name="title",maxlength=25,autocomplete="off")
+        input(placeholder="Description",required,type="text",name="description",maxlength=75,autocomplete="off")
+        input(placeholder="separate by coma",required,type="text",name="hashtags",maxlength=25,autocomplete="off")
+        input(value="Upload Video", type="submit")
