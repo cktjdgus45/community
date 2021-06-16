@@ -1,0 +1,17 @@
+mixin news(post)    
+    div.news 
+        div.creator
+            div.creator-profile
+                img(src=post.owner.avatarUrl,width="100",height="100")
+                small #{post.owner.name}
+            div.creator-createdAt
+                small=post.createdAt 
+        h4.content-title
+            a(href=`/news/${post.id}`)=post.title
+        p=post.content         
+        div.content-file
+            if(post.videoFileUrl !== "")
+                video(src="/"+post.videoFileUrl,width="500",height="400",controls=true,data-id=post._id)
+            if(post.imageFileUrl !== "")
+                img(src="/"+post.imageFileUrl,width="200",height="200")
+        hr

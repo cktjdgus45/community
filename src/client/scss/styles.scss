@@ -1,4 +1,66 @@
-body{
-    background-color: red;   
-    color: yellow;
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+* { font-family: 'Spoqa Han Sans Neo', 'sans-serif'; }
+.news{
+    .creator{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        img{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        .creator-profile{
+            display: flex;
+            align-items: center;
+            small{
+                margin-left: 15px;
+                color: black;
+                font-size: 15px;
+            }
+        }
+    }
+    .content-file{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .news-btns{
+        display: flex;
+        justify-content: center;
+        a{
+            margin-left: 15px;
+        }
+    }
+    .video__add-comments{
+        textarea{
+            height: 20px;
+        }
+    }
+    .video__comments{
+        ul{
+            list-style-type: none;
+            li{
+                display: flex;
+                width: 75%;
+                justify-content: space-between;
+                .delBtn{
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+footer{
+    opacity: 0.7;
+    color: gray;
+}
+
+input[type="submit"]{
+    cursor: pointer;
+}
+textarea{
+    width: 90%;
+    resize: none;
 }

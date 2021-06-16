@@ -9,5 +9,5 @@ block content
         label(for="image") 이미지
         input(type="file",accept="image/png, image/gif, image/jpeg",id="image",name="image" )
         input(placeholder="제목을 입력해주세요.",required,type="text",name="title",maxlength=25,autocomplete="off")
-        textarea(name="content", cols="30", rows="10",required,placeholder='내용을 적어주세요.')         
+        <textarea name="content", cols="30", rows="10",style="resize: none;",required,placeholder='내용을 적어주세요.'></textarea>         
         input(value="등록", type="submit")

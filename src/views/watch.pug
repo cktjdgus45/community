@@ -2,24 +2,27 @@ extends base.pug
 
 block content
     div.news(data-id=news._id)
-        div 
-            img(src=news.owner.avatarUrl,width="100",height="100")
-            small #{news.owner.name}
+        div.creator
+            div.creator-profile
+                img(src=news.owner.avatarUrl,width="100",height="100")
+                small #{news.owner.name}
+            div.creator-createdAt
+                    small=news.createdAt 
         hr
         div
             h3=news.title
             p=news.content
-        div
+        div.content-file
             if(news.videoFileUrl !== "")
                 video(src="/"+news.videoFileUrl,width="500",height="500",controls=true)
             if(news.imageFileUrl !== "")
                 img(src="/"+news.imageFileUrl,width="200",height="200")
         hr
-        div
-        if String(news.owner._id) === String(loggedInUser._id)
-            a(href=`${news.id}/edit`) 게시글 편집 &rarr;
-            br
-            a(href=`${news.id}/delete`) 게시글 삭제 &rarr;
+        div.news-btns
+            if String(news.owner._id) === String(loggedInUser._id)
+                a(href=`${news.id}/edit`) 게시글 편집 &rarr;
+                br
+                a(href=`${news.id}/delete`) 게시글 삭제 &rarr;
         hr
         if loggedIn
             div.video__add-comments 
